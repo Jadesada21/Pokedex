@@ -1,3 +1,5 @@
+//! สำหรับการ path fetch db list & key of db
+
 import axios from "axios"
 import { moduleName } from "../utils/constant"
 import type { IPokemonListResponse } from '../interface/pokemonList'

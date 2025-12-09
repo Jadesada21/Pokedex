@@ -1,19 +1,22 @@
 import React from 'react'
 import { useEffect } from 'react'
-import { pokemonListServices, } from '../../service/pokemonList'
-import { pokemonDetailServices } from '../../service/pokemonDetail'
+import { pokemonListServices, pokemonDetailServices } from '../../service'
+
 
 const HomePage = () => {
 
-    // const callData = async () => {
-    //     const data = await pokemonListServices.getPokemonList()
-    //     console.log('data', data.data.results) // data. อะไรก็ตามที่มันมีใน db 
-    // }
+    //! สำหรับดึงข้อมูลที่ได้จาก getPokemonList มาแสดงในหน้า homepage
+    const callData = async () => {
+        const data = await pokemonListServices.getPokemonList()
+        console.log('data', data.data.results) // data. อะไรก็ตามที่มันมีใน db 
+    }
 
-    // useEffect(() => {
-    //     callData()
-    // }, [])
+    useEffect(() => {
+        callData()
+    }, [])
 
+
+    //! สำหรับดึงข้อมูลที่ได้จาก getPokemonDetail มาแสดงในหน้า homepage
     const callDataByName = async () => {
         const data = await pokemonDetailServices.getPokemonDetail("ditto")
         console.log('data', data.data)

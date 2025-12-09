@@ -1,3 +1,5 @@
+//! แปลงข้อมูล JSON DB To Typescript
+
 export interface IPokemonDetailResponse {
     abilities: Ability[]
     base_experience: number

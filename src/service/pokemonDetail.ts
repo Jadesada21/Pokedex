@@ -1,3 +1,5 @@
+//! สำหรับการ path fetch by name
+
 import axios from "axios"
 import { moduleName } from "../utils/constant"
 import type { IPokemonDetailResponse } from '../interface/pokemonDetail'

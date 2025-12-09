@@ -1,3 +1,5 @@
+//! กำหนด type ของ key แต่ละอันของ DB
+
 export interface IPokemonListResponse {
     count: number;
     next: string;
