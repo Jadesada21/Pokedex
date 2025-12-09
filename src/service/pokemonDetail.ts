@@ -9,12 +9,9 @@ interface IGetPokemonDetailResponse {
 }
 export const pokemonDetailServices = {
     getPokemonDetail: async (
-        limit?: number,
-        offset?: number
+        name?: string,
     ): Promise<IGetPokemonDetailResponse> => {
-        const res = await axios.get(
-            (`${moduleName}/pokemon?limit=${limit || 151}&offset=${offset || 0}`)
-        )
+        const res = await axios.get(`${moduleName}pokemon/${name}`)
         return res
     }
 }

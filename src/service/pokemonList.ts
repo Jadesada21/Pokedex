@@ -8,7 +8,10 @@ interface IGetPokemonListResponse {
 
 }
 export const pokemonListServices = {
-    getPokemonList: async (limit?: number, offset?: number): Promise<IGetPokemonListResponse> => {
+    getPokemonList: async (
+        limit?: number,
+        offset?: number
+    ): Promise<IGetPokemonListResponse> => {
         const res = await axios.get(
             (`${moduleName}/pokemon?limit=${limit || 151}&offset=${offset || 0}`)
         )
