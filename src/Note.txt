@@ -1,0 +1,3 @@
+// API ที่ใช้สำหรับ project นี้
+
+https://pokeapi.co/ 
