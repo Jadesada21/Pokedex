@@ -1,0 +1,1 @@
+export const moduleName = "https://pokeapi.co/api/v2/"
