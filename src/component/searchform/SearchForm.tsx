@@ -1,10 +1,15 @@
 
 import { generationList, typesList, sortList } from '../../utils/optionList'
+import { useSearchForm } from './SearchForm.hook'
 
 
-export default function SearchForm() {
+const SearchForm = () => {
+    const { fieldKeyword } = useSearchForm()
+
     return (
         <div className="grid grid-cols-4 gap-10">
+
+            {/* Generation */}
             <div>
                 <label
                     htmlFor="generation"
@@ -22,6 +27,7 @@ export default function SearchForm() {
                 </select>
             </div>
 
+            {/*  Type */}
             <div>
                 <label
                     htmlFor="type"
@@ -39,6 +45,7 @@ export default function SearchForm() {
                 </select>
             </div>
 
+            {/* Sort By */}
             <div>
                 <label
                     htmlFor="sort"
@@ -64,6 +71,7 @@ export default function SearchForm() {
                     Search
                 </label>
                 <input
+                    {...fieldKeyword}
                     id="generation"
                     className="text-white bg-[#253641] w-full p-2.5 block rounded border border-gray-300 focus:ring-[#375EAA] focus:border-[#375EAA]"
                 />
@@ -71,3 +79,5 @@ export default function SearchForm() {
         </div>
     )
 }
+
+export default SearchForm

@@ -3,10 +3,11 @@
 import axios from "axios"
 import { moduleName } from "../utils/constant"
 import type { IPokemonListResponse } from '../interface/pokemonList'
+import { handleResponse, type IResponse } from "../utils/handleResponse"
 
-interface IGetPokemonListResponse {
+interface IGetPokemonListResponse extends IResponse {
     status: number | undefined,
-    data: IPokemonListResponse
+    data?: IPokemonListResponse
 
 }
 export const pokemonListServices = {
@@ -14,9 +15,16 @@ export const pokemonListServices = {
         limit?: number,
         offset?: number
     ): Promise<IGetPokemonListResponse> => {
-        const res = await axios.get(
-            (`${moduleName}/pokemon?limit=${limit || 151}&offset=${offset || 0}`)
-        )
-        return res
+        try {
+            const res = await axios.get(
+                (`${moduleName}/pokemon?limit=${limit || 151}&offset=${offset || 0}`)
+            )
+            return handleResponse.success(res)
+        } catch (err: any) {
+            return handleResponse.error(err)
+        }
+
+
     }
 }
+
