@@ -13,9 +13,14 @@ function App() {
     {
       path: '/detail',
       element: <DetailPage />,
-    }
+    },
   ])
-  return <RouterProvider router={router} />
+
+  return (
+    <div className="bg-[url('/list_bg.jpg')] min-h-screen">
+      <RouterProvider router={router} />
+    </div>
+  )
 }
 
 export default App

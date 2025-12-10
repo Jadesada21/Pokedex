@@ -1,6 +1,6 @@
-import React from 'react'
 import { useEffect } from 'react'
 import { pokemonListServices, pokemonDetailServices } from '../../service'
+import SearchForm from '../../component/searchform/'
 
 
 const HomePage = () => {
@@ -28,8 +28,12 @@ const HomePage = () => {
 
 
     return (
-        <div>
-            HomePage
+        <div className="w-[90%] m-auto max-w-[1100px]">
+            <div className="flex justify-center">
+                <img src="/logo.webp" className="max-h-[80px] mt-[20px]" alt="logo" />
+            </div>
+
+            <SearchForm />
         </div>
     )
 }
