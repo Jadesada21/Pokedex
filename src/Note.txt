@@ -1,3 +1,7 @@
 // API ที่ใช้สำหรับ project นี้
 
 https://pokeapi.co/ 
+
+// Drive ของรูปภาพ
+
+https://drive.google.com/drive/u/0/folders/1lW9SAGtVb5H7CosWQJ4l3UOfAyvveVW0

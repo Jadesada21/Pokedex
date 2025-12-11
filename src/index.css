@@ -1,1 +1,75 @@
 @import "tailwindcss";
+
+@layer components {
+    .badge-type-grass {
+        background-color: #a8ff98;
+    }
+
+    .badge-type-poison {
+        background-color: #d6a2e4;
+    }
+
+    .badge-type-normal {
+        background-color: #dcdcdc;
+    }
+
+    .badge-type-fire {
+        background-color: #ffb971;
+    }
+
+    .badge-type-water {
+        background-color: #8cc4e2;
+    }
+
+    .badge-type-electric {
+        background-color: #ffe662;
+    }
+
+    .badge-type-ice {
+        background-color: #8cf5e4;
+    }
+
+    .badge-type-fighting {
+        background-color: #da7589;
+    }
+
+    .badge-type-ground {
+        background-color: #e69a74;
+    }
+
+    .badge-type-flying {
+        background-color: #bbc9e4;
+    }
+
+    .badge-type-psychic {
+        background-color: #ffa5da;
+    }
+
+    .badge-type-bug {
+        background-color: #bae05f;
+    }
+
+    .badge-type-rock {
+        background-color: #c9bb8a;
+    }
+
+    .badge-type-ghost {
+        background-color: #8291e0;
+    }
+
+    .badge-type-dark {
+        background-color: #8e8c94;
+    }
+
+    .badge-type-dragon {
+        background-color: #88a2e8;
+    }
+
+    .badge-type-steel {
+        background-color: #9fb8b9;
+    }
+
+    .badge-type-fairy {
+        background-color: #fdb9e9;
+    }
+}

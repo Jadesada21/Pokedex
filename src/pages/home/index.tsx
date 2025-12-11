@@ -1,34 +1,14 @@
-import { useEffect } from 'react'
-import { pokemonListServices, pokemonDetailServices } from '../../service'
+import PokemonCard from '../../component/pokemoncard'
 import SearchForm from '../../component/searchform/'
 import { usePokemonListStore } from '../../store/pokemonList'
 
 
+
 const HomePage = () => {
 
-    //! สำหรับดึงข้อมูลที่ได้จาก getPokemonList มาแสดงในหน้า homepage
-    // const callData = async () => {
-    //     const data = await pokemonListServices.getPokemonList()
-    //     console.log('data', data.data.results) // data. อะไรก็ตามที่มันมีใน db 
-    // }
-
-    // useEffect(() => {
-    //     callData()
-    // }, [])
-
-
-    //! สำหรับดึงข้อมูลที่ได้จาก getPokemonDetail มาแสดงในหน้า homepage
-    // const callDataByName = async () => {
-    //     const data = await pokemonDetailServices.getPokemonDetail("ditto")
-    //     console.log('data', data.data)
-    // }
-
-    // useEffect(() => {
-    //     callDataByName()
-    // }, [])
 
     const { pokemon } = usePokemonListStore()
-
+    console.log(pokemon)
 
     return (
         <div className="w-[90%] m-auto max-w-[1100px]">
@@ -38,12 +18,9 @@ const HomePage = () => {
 
             <SearchForm />
 
-            <div>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 mt-8 pb-10">
                 {pokemon.data?.map((item) => {
-                    return <div className="text-gray-300"
-                        key={`pokemon-${item.id}`}
-                    >
-                        {item.name}</div>
+                    return <PokemonCard data={item} />
                 })}
             </div>
         </div>

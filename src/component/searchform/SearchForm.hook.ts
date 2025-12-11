@@ -42,7 +42,12 @@ const useSearchForm = () => {
                 const res = await pokemonDetailServices.getPokemonDetail(pokemon.name)
 
                 const pokeData = res.data
-                pokeList.push({ ...pokeData })
+                pokeList.push({
+                    ...pokeData,
+                    image: pokeData.sprites.other['official-artwork'].front_default
+                        ||
+                        pokeData.sprites.other.dream_world.front_default
+                })
                 // เก็บข้อมูล Pokemon ที่ได้ใน pokeList
 
             } // อัปเดตสถานะหลังจากดึงข้อมูลทั้งหมดเสร็จสิ้น
