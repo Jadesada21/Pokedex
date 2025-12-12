@@ -1,37 +1,41 @@
-import type { IPokemonDetailResponse } from "../../interface/pokemonDetail"
+import type { Type } from "../../interface/pokemonDetail"
+import { Link } from 'react-router-dom'
 
 
 interface PokemonCardProps {
-    data: IPokemonDetailResponse
+    image: string
+    name: string
+    id: number
+    types: Type[]
 }
 
-const PokemonCard = ({ data }: PokemonCardProps) => {
+const PokemonCard = ({ image, name, id, types }: PokemonCardProps) => {
 
     return (
 
         <div className="max-w-sm shadow-sm rounded-[20px] overflow-hidden shadoww dark:bg-[#253641] dark:border-gray-700 p-2">
             <div className="bg-[url('./poke-card-bg.png')] bg-center aspect-square w-full bg-cover rounded-[20px] ">
-                <a href="" className="overflow-hidden h-60">
+                <Link to={`/detail/${name}`} className="overflow-hidden h-60">
                     <img
                         className="object-cover "
-                        src={data.image}
+                        src={image}
                         alt="" />
-                </a>
+                </Link>
             </div>
 
             <div className="p-3 text-center">
                 <div className="flex justify-between items-center">
                     <h4 className="text-xl font-bold text-white/90 capitalize">
-                        {data.name}
+                        {name}
                     </h4>
                     <p
                         className="font-bold text-xl text-white/70 ">
-                        #{data.id}
+                        #{id}
                     </p>
                 </div>
 
                 <div className="flex gap-2 pt-2 ">
-                    {data.types.map((item) => {
+                    {types.map((item) => {
                         return <p className={`badge-type-${item.type.name} rounded-2xl px-2 capitalize `}>{item.type.name}</p>
                     })}
                 </div>

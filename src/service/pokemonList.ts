@@ -8,8 +8,8 @@ import { handleResponse, type IResponse } from "../utils/handleResponse"
 interface IGetPokemonListResponse extends IResponse {
     status: number | undefined,
     data?: IPokemonListResponse
-
 }
+
 export const pokemonListServices = {
     getPokemonList: async (
         limit?: number,

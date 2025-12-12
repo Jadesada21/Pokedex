@@ -11,7 +11,7 @@ function App() {
       element: <HomePage />,
     },
     {
-      path: '/detail',
+      path: '/detail/:name',
       element: <DetailPage />,
     },
   ])
