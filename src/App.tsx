@@ -1,5 +1,4 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom"
-import { Link } from 'react-router-dom'
 import HomePage from "./pages/home"
 import DetailPage from "./pages/detail"
 
@@ -17,7 +16,7 @@ function App() {
   ])
 
   return (
-    <div className="bg-[url('/list_bg.jpg')] min-h-screen">
+    <div className="bg-[url('/list_bg.webp')] min-h-screen bg-contain bg-top m-auto w-full ">
       <RouterProvider router={router} />
     </div>
   )
