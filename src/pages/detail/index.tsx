@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { useParams } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { pokemonDetailServices } from '../../service';
 import type { IPokemonDetailResponse } from '../../interface/pokemonDetail';
 import PokemonCard from '../../component/pokemoncard';
@@ -20,6 +20,7 @@ const DetailPage = () => {
     const callDataByName = async (name: string) => {
         const res = await pokemonDetailServices.getPokemonDetail(name)
         if (res.status === 200) {
+            console.log(res)
             if (res.data)
 
                 setPokemon({
@@ -48,9 +49,9 @@ const DetailPage = () => {
 
 
     return (
-        <div className="w-[90%] m-auto max-w-[1100px]">
+        <div className="w-[90%] m-auto max-w-[1100px] pb-10">
             <div className="flex justify-center">
-                <img src="/logo.webp" className="max-h-[80px] mt-[20px]" alt="logo" />
+                <Link to={"/"}><img src="/logo.webp" className="max-h-[80px] mt-[20px]" alt="logo" /></Link>
             </div>
 
             <div className="flex justify-center w-[90%] max-w-[600px] m-auto pt-10">
@@ -70,7 +71,7 @@ const DetailPage = () => {
                             />
                         </div>
 
-                        <div className="p-3 text-center">
+                        <div className="p-3 dark:bg-gray-500 mt-5">
                             <div className="flex justify-between items-center">
                                 <h4 className="text-xl font-bold text-white/90 capitalize">
                                     {pokemon.data.name}
@@ -81,16 +82,62 @@ const DetailPage = () => {
                                 </p>
                             </div>
 
-                            <div className="flex gap-2 pt-2 ">
+                            <div className="flex gap-3 pt-4 ">
                                 {pokemon.data.types.map((item) => {
                                     return <p className={`badge-type-${item.type.name} rounded-2xl px-2 capitalize `}>{item.type.name}</p>
                                 })}
+                            </div>
+
+                            <div className="grid grid-cols-1 mt-5 sm:grid-cols-2">
+                                <div className="flex gap-x-2.5 justify-start sm:justify-center">
+                                    <div className="">Weight</div>
+                                    {pokemon.data.weight} KG.
+                                </div>
+                                <div className="flex gap-x-2.5 justify-start sm:justify-center">
+                                    <div>Height</div>
+                                    {pokemon.data.height} M.
+                                </div>
+
+
+                                <div className="pt-5">
+                                    <h5 className="pb-2">Abilities</h5>
+                                    <div className="grid grid-cols-2 sm:grid-cols-1 gap-1">
+                                        {pokemon.data.abilities.map((item) => {
+                                            return (
+                                                < div
+                                                    className={`badge-type-`
+                                                    }
+                                                >
+                                                    {item.ability.name}
+                                                </div>
+                                            )
+                                        })}
+                                    </div>
+                                </div>
+
+                                <div className=" pt-5">
+                                    <h5 className="pb-2">State</h5>
+                                    <div className="grid grid-cols-1 gap-1">
+                                        {pokemon.data.stats.map((item) => {
+                                            return (
+                                                <div className="flex justify-between">
+                                                    < div className="">
+                                                        {item.stat.name} :
+                                                    </div>
+                                                    <div className="">
+                                                        {item.base_stat}
+                                                    </div>
+                                                </div>
+                                            )
+                                        })}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div >
                 )}
             </div>
-        </div>
+        </div >
     )
 }
 

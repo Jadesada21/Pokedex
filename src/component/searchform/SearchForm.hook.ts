@@ -53,6 +53,7 @@ const useSearchForm = () => {
 
             } // อัปเดตสถานะหลังจากดึงข้อมูลทั้งหมดเสร็จสิ้น
             setFetchPokemonList({ data: pokeList, loading: false, error: null })
+            setPokemonList({ data: pokeList, loading: false, error: null })
 
         } else {
             // ถ้าการดึงข้อมูลล้มเหลว อัปเดตสถานะพร้อมข้อผิดพลาด
