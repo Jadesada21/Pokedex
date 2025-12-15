@@ -2,6 +2,8 @@ import { useEffect } from 'react'
 import { pokemonDetailServices, pokemonListServices } from '../../service'
 import { useForm } from 'react-hook-form';
 import { usePokemonListStore } from '../../store/pokemonList'
+import { generationList } from '../../utils/optionList';
+import type { IPokemonDetailResponse } from '../../interface/pokemonDetail';
 
 const useSearchForm = () => {
 
@@ -14,6 +16,10 @@ const useSearchForm = () => {
 
     // ใช้สำหรับเก็บค่าที่พิมในช่อง search
     const keyword = watch('keyword')
+    const generation = watch('generation')
+    const type = watch('type')
+    const sort = watch('sort')
+
 
     // usePokemonListStore ใช้ hook จาก zustandเพื่อดึงข้อมูลและฟังชั่นจาก store
     // setFetchPokemonList: ใช้ในการอัปเดตสถานะการดึงข้อมูล Pokemon API
@@ -21,9 +27,13 @@ const useSearchForm = () => {
     // setPokemonList: ใช้ในการอัปเดตข้อมูลที่แสดงใน UI ตาม keyword
     const { setFetchPokemonList, fetchPokemon, setPokemonList } = usePokemonListStore()
 
-    const callDataByName = async () => {
+    const callDataByName = async (filter: {
+        name: string;
+        limit: number;
+        offset: number;
+    }) => {
         // ดึงข้อมูลรายการ Pokemon ทั้งหมดจาก API
-        const resList = await pokemonListServices.getPokemonList()
+        const resList = await pokemonListServices.getPokemonList(filter.limit, filter.offset)
 
 
         // เริ่มต้นการเก็บข้อมูล Pokemon ที่ได้จากการดึงข้อมูล
@@ -53,7 +63,8 @@ const useSearchForm = () => {
 
             } // อัปเดตสถานะหลังจากดึงข้อมูลทั้งหมดเสร็จสิ้น
             setFetchPokemonList({ data: pokeList, loading: false, error: null })
-            setPokemonList({ data: pokeList, loading: false, error: null })
+            const data = filterPokemon(pokeList, keyword, type, sort)
+            setPokemonList({ data: data, loading: false, error: null })
 
         } else {
             // ถ้าการดึงข้อมูลล้มเหลว อัปเดตสถานะพร้อมข้อผิดพลาด
@@ -61,25 +72,62 @@ const useSearchForm = () => {
         }
     }
 
+    const filterPokemon = (
+        pokeList: IPokemonDetailResponse[],
+        keyword: string,
+        type: string,
+        sort: "id" | "name") => {
+
+        const keywordFilter = pokeList.filter((item) =>
+            item.name.toLowerCase().includes(keyword?.toLowerCase())
+        )
+        const typeFilter = type !== 'all types' ? keywordFilter.filter((item) =>
+            item.types.find((f) =>
+                f.type.name.toLowerCase().includes(type.toLowerCase())
+            )
+        )
+            : keywordFilter
+
+
+        return sortBy(typeFilter, sort)
+    }
+
+    const sortBy = (data: IPokemonDetailResponse[], type: "id" | "name") => {
+        switch (type) {
+            case 'id':
+                return data.sort((a, b) => a.id - b.id)
+            case 'name':
+                return data.sort((a, b) => a.name > b.name ? 1 : b.name > a.name ? -1 : 0)
+            default:
+                return data.sort((a, b) => a.id - b.id)
+        }
+    }
+
     // ดึงข้อมูลครั้งแรกเมื่อคอมโพเนนต์โหลด
     useEffect(() => {
-        callDataByName()
-    }, [])
+        if (generation !== undefined) {
+            callDataByName(generationList[generation])
+        }
+    }, [generation])
 
 
-    // ค้นหาข้อมูล Pokemon ตามคำค้นในช่อง search เมื่อ 'keyword' มีการเปลี่ยนแปลง
+
     useEffect(() => {
-        // กรองข้อมูล Pokemon ที่ชื่อมีคำค้นจากช่อง search
-        const data = fetchPokemon.data.filter((item) => item.name.toLowerCase().includes(keyword?.toLowerCase()))
+        const data = filterPokemon(fetchPokemon.data, keyword, type, sort)
 
-        // อัปเดตสถานะการแสดงข้อมูลที่กรองแล้ว
-
-        setPokemonList({ data: data, loading: false, error: null, })
-    }, [keyword])
+        setPokemonList({
+            data: data,
+            loading: false,
+            error: null,
+        })
+    }, [keyword, type, sort])
 
 
     return {
-        fieldKeyword: register('keyword')
+        fieldKeyword: register('keyword'),
+        fieldGeneration: register('generation'),
+        fieldType: register('type'),
+        fieldSort: register('sort')
     }
 }
 

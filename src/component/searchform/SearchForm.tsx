@@ -4,7 +4,7 @@ import { useSearchForm } from './SearchForm.hook'
 
 
 const SearchForm = () => {
-    const { fieldKeyword } = useSearchForm()
+    const { fieldKeyword, fieldGeneration, fieldType, fieldSort } = useSearchForm()
 
     return (
         <div className="grid grid-cols-4 gap-10">
@@ -18,6 +18,7 @@ const SearchForm = () => {
                     Generation
                 </label>
                 <select
+                    {...fieldGeneration}
                     id="generation"
                     className=" capitalize text-white bg-[#253641] w-full p-2.5 block rounded border border-gray-300 focus:ring-[#375EAA] focus:border-[#375EAA]"
                 >
@@ -36,6 +37,7 @@ const SearchForm = () => {
                     Type
                 </label>
                 <select
+                    {...fieldType}
                     id="type"
                     className=" capitalize text-white bg-[#253641] w-full p-2.5 block rounded border border-gray-300 focus:ring-[#375EAA] focus:border-[#375EAA]"
                 >
@@ -54,6 +56,7 @@ const SearchForm = () => {
                     Sort By
                 </label>
                 <select
+                    {...fieldSort}
                     id="sort"
                     className=" capitalize text-white bg-[#253641] w-full p-2.5 block rounded border border-gray-300 focus:ring-[#375EAA] focus:border-[#375EAA]"
                 >
